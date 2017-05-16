@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{69321D56-5C46-4496-9CDA-C38C51206425}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOGIC", "LOGIC\LOGIC.csproj", "{ECDF7AED-2166-4BE1-B32E-0E15A49B3FEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DATA", "..\TelefoonkraamData\DATA\DATA.csproj", "{EC70D04D-78FF-4E84-93B6-B2F1E557F6A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{69321D56-5C46-4496-9CDA-C38C51206425}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69321D56-5C46-4496-9CDA-C38C51206425}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69321D56-5C46-4496-9CDA-C38C51206425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECDF7AED-2166-4BE1-B32E-0E15A49B3FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECDF7AED-2166-4BE1-B32E-0E15A49B3FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECDF7AED-2166-4BE1-B32E-0E15A49B3FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECDF7AED-2166-4BE1-B32E-0E15A49B3FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC70D04D-78FF-4E84-93B6-B2F1E557F6A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC70D04D-78FF-4E84-93B6-B2F1E557F6A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC70D04D-78FF-4E84-93B6-B2F1E557F6A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC70D04D-78FF-4E84-93B6-B2F1E557F6A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
