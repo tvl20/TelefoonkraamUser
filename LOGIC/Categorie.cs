@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace LOGIC
 {
-    class Categorie
+    public class Categorie
     {
+        public string Naam { get; private set; }
+
+        public Categorie(string naam)
+        {
+            Naam = naam;
+        }
     }
 }

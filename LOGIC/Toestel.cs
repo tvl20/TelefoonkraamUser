@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace LOGIC
 {
-    class Toestel
+    public class Toestel
     {
+        public string Naam { get; private set; }
+        public List<Product> Producten { get; private set; }
+        public string Afbeelding { get; private set; }
+
+        public Toestel(string naam, List<Product> producten, string afbeelding)
+        {
+            Naam = naam;
+            Producten = producten;
+            Afbeelding = afbeelding;
+        }
+
+        public List<Product> GeefAlleProducten()
+        {
+            return Producten;
+        }
     }
 }

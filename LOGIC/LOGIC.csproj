@@ -45,7 +45,7 @@
     <Compile Include="Categorie.cs" />
     <Compile Include="Kortingscode.cs" />
     <Compile Include="Merk.cs" />
-    <Compile Include="OrderStatus.cs" />
+    <Compile Include="BestelStatus.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Toestel.cs" />
     <Compile Include="Webshop.cs" />

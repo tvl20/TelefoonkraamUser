@@ -6,7 +6,25 @@ using System.Threading.Tasks;
 
 namespace LOGIC
 {
-    class Merk
+    public class Merk
     {
+        public string Naam { get; private set; }
+        public List<Toestel> Toestellen { get; private set; }
+
+        public Merk(string naam, List<Toestel> toestellen)
+        {
+            Naam = naam;
+            Toestellen = toestellen;
+        }
+
+        public List<Toestel> GeefToestellen()
+        {
+            return Toestellen;
+        }
+
+        public List<Product> GeefProducten()
+        {
+            return Toestellen.SelectMany(toestel => toestel.GeefAlleProducten()).ToList();
+        }
     }
 }

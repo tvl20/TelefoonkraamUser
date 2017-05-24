@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace LOGIC
 {
-    enum OrderStatus
+    public enum BestelStatus
     {
+        Geannuleerd,
+        Besteld,
+        Betaald,
+        Verzonden
     }
 }
