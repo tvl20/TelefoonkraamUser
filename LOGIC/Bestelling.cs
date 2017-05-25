@@ -8,7 +8,7 @@ namespace LOGIC
 {
     public class Bestelling
     {
-        public int OrderNummer { get; private set; }
+        public int BestelNummer { get; private set; }
         public List<Bestelregel> Bestelregels { get; private set; }
         public BestelStatus BestelStatus { get; private set; }
         public Kortingscode Kortingscode { get; private set; }
@@ -21,9 +21,33 @@ namespace LOGIC
         public string KlantAdresHuisnummer { get; private set; }
         public string KlantTelefoonnummer { get; private set; }
 
+        public Bestelling(List<Product> products, Kortingscode kortingscode, string klantNaam, string klantEmailadres, string klantAdresLand,
+            string klantAdresPostcode, string klantAdresPlaatsnaam, string klantAdresStraatnaam,
+            string klantAdresHuisnummer, string klantTelefoonnummer)
+        {
+            Kortingscode = kortingscode;
+            KlantNaam = klantNaam;
+            KlantEmailadres = klantEmailadres;
+            KlantAdresLand = klantAdresLand;
+            KlantAdresPostcode = klantAdresPostcode;
+            KlantAdresPlaatsnaam = klantAdresPlaatsnaam;
+            KlantAdresStraatnaam = klantAdresStraatnaam;
+            KlantAdresHuisnummer = klantAdresHuisnummer;
+            KlantTelefoonnummer = klantTelefoonnummer;
+            List<Product> verschillendeProducten = products.Distinct().ToList();
+            foreach (Product product in verschillendeProducten)
+            {
+                Bestelregels.Add(new Bestelregel(product.Naam, product.VerkoopPrijs, product.Afbeelding, products.Count(product1 => product1.Equals(product))));
+            }
+            //TODO: Voeg bestelling toe aan Database
+            //TODO: Geef Bestelnummer zijn waarde
+            BestelStatus = BestelStatus.Besteld;
+            //TODO: Bevestigingsemail verzenden
+        }
+
         public Bestelling(int orderNummer, List<Bestelregel> bestelregels, BestelStatus bestelStatus, Kortingscode kortingscode, string klantNaam, string klantEmailadres, string klantAdresLand, string klantAdresPostcode, string klantAdresPlaatsnaam, string klantAdresStraatnaam, string klantAdresHuisnummer, string klantTelefoonnummer)
         {
-            OrderNummer = orderNummer;
+            BestelNummer = orderNummer;
             Bestelregels = bestelregels;
             BestelStatus = bestelStatus;
             Kortingscode = kortingscode;
@@ -38,7 +62,7 @@ namespace LOGIC
         }
         public Bestelling(int orderNummer, List<Bestelregel> bestelregels, BestelStatus bestelStatus, string klantNaam, string klantEmailadres, string klantAdresLand, string klantAdresPostcode, string klantAdresPlaatsnaam, string klantAdresStraatnaam, string klantAdresHuisnummer, string klantTelefoonnummer)
         {
-            OrderNummer = orderNummer;
+            BestelNummer = orderNummer;
             Bestelregels = bestelregels;
             BestelStatus = bestelStatus;
             KlantNaam = klantNaam;
@@ -53,7 +77,7 @@ namespace LOGIC
 
         public BestelStatus GeefBestelStatus()
         {
-            throw new NotImplementedException();
+            return BestelStatus;
         }
     }
 }

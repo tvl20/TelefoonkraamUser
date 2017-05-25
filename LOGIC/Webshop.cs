@@ -29,17 +29,17 @@ namespace LOGIC
 
         public List<Product> ZoekProduct(string zoekterm)
         {
-            throw new NotImplementedException();
+            return Producten.Where(product => product.ToString().Contains(zoekterm)).ToList();
         }
 
-        public List<Product> GeefProductenMetCategorie(List<Categorie> Categorieën)
+        public List<Product> GeefProductenMetCategorie(List<Categorie> categorieën)
         {
-            throw new NotImplementedException();
+            return (from product in Producten from categorie in categorieën where product.Categorieën.Contains(categorie) select product).ToList();
         }
 
         public List<Product> GeefProductenGeschiktVoor(List<Toestel> toestellen)
         {
-            throw new NotImplementedException();
+            return Toestellen.SelectMany(toestel => toestel.Producten).ToList();
         }
 
         public List<Merk> GeefMerken()
@@ -47,14 +47,31 @@ namespace LOGIC
             return Merken;
         }
 
-        public List<Product> GeefToestellen(Merk merk)
+        public List<Toestel> GeefToestellen(Merk merk)
         {
-            throw new NotImplementedException();
+            return merk.Toestellen;
         }
 
-        public BestelStatus GeefBestelStatus(int bestelnummer, string emialadres)
+        public BestelStatus GeefBestelStatus(int bestelnummer, string emailadres)
         {
-            throw new NotImplementedException();
+            return Bestellingen.First(bestelling => bestelling.BestelNummer == bestelnummer &&
+                                             bestelling.KlantEmailadres == emailadres).BestelStatus;
+        }
+
+        public bool GebruikKortingsCode(string code)
+        {
+            Kortingscode mogelijkeKortingscode = Kortingscodes.First(kortingscode => kortingscode.Code == code);
+            if (mogelijkeKortingscode == null)
+            {
+                return false;
+            }
+            if (mogelijkeKortingscode.EindDatum >= DateTime.Today ||
+                mogelijkeKortingscode.IngangsDatum >= DateTime.Today)
+            {
+                return false;
+            }
+            Winkelwagen.GebruikKortingsCode(mogelijkeKortingscode);
+            return true;
         }
 
         public void RegistreerVoorNieuwsbrief(string emailadres)

@@ -23,5 +23,10 @@ namespace LOGIC
         {
             return Producten;
         }
+
+        public override string ToString()
+        {
+            return Naam;
+        }
     }
 }

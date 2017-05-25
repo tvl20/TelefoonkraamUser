@@ -14,5 +14,10 @@ namespace LOGIC
         {
             Naam = naam;
         }
+
+        public override string ToString()
+        {
+            return Naam;
+        }
     }
 }

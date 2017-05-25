@@ -26,5 +26,10 @@ namespace LOGIC
         {
             return Toestellen.SelectMany(toestel => toestel.GeefAlleProducten()).ToList();
         }
+
+        public override string ToString()
+        {
+            return Naam;
+        }
     }
 }

@@ -26,5 +26,24 @@ namespace LOGIC
             AantalAanwezig = aantalAanwezig;
             VerwachteLevertijd = verwachteLevertijd;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Product))
+            {
+                return false;
+            }
+            Product product = obj as Product;
+            if (Naam == product.Naam && VerkoopPrijs == product.VerkoopPrijs && Afbeelding == product.Afbeelding)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public override string ToString()
+        {
+            return Naam;
+        }
     }
 }

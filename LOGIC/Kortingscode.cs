@@ -33,7 +33,7 @@ namespace LOGIC
 
         public decimal GeefKortingsPercentage()
         {
-            throw new NotImplementedException();
+            return KortingsPercentage;
         }
     }
 }
