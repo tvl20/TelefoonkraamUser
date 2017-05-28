@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOGIC", "LOGIC\LOGIC.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DATA", "..\TelefoonkraamData\DATA\DATA.csproj", "{EC70D04D-78FF-4E84-93B6-B2F1E557F6A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOGIC.Tests", "LOGIC.Tests\LOGIC.Tests.csproj", "{FFA259E5-E400-435C-B85A-515F8FA0D952}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EC70D04D-78FF-4E84-93B6-B2F1E557F6A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC70D04D-78FF-4E84-93B6-B2F1E557F6A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC70D04D-78FF-4E84-93B6-B2F1E557F6A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFA259E5-E400-435C-B85A-515F8FA0D952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFA259E5-E400-435C-B85A-515F8FA0D952}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFA259E5-E400-435C-B85A-515F8FA0D952}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFA259E5-E400-435C-B85A-515F8FA0D952}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

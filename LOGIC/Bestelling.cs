@@ -25,6 +25,7 @@ namespace LOGIC
             string klantAdresPostcode, string klantAdresPlaatsnaam, string klantAdresStraatnaam,
             string klantAdresHuisnummer, string klantTelefoonnummer)
         {
+            Bestelregels = new List<Bestelregel>();
             Kortingscode = kortingscode;
             KlantNaam = klantNaam;
             KlantEmailadres = klantEmailadres;
@@ -34,7 +35,14 @@ namespace LOGIC
             KlantAdresStraatnaam = klantAdresStraatnaam;
             KlantAdresHuisnummer = klantAdresHuisnummer;
             KlantTelefoonnummer = klantTelefoonnummer;
-            List<Product> verschillendeProducten = products.Distinct().ToList();
+            List<Product> verschillendeProducten = new List<Product>();
+            foreach (Product product in products)
+            {
+                if (!verschillendeProducten.Contains(product))
+                {
+                    verschillendeProducten.Add(product);
+                }
+            }
             foreach (Product product in verschillendeProducten)
             {
                 Bestelregels.Add(new Bestelregel(product.Naam, product.VerkoopPrijs, product.Afbeelding, products.Count(product1 => product1.Equals(product))));
