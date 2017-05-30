@@ -60,11 +60,21 @@ namespace LOGIC
 
         private bool VerzendBestelBevestiging(Bestelling bestelling)
         {
-            string emailadresAfzender = null;
-            string wachtwoordAfzender = null;
-            string ontvangerEmailadres
+            MailAddress from = new MailAddress("lars.van.driel@hotmail.com", "Telefoonkraam.nl");
+            MailAddress to = new MailAddress(bestelling.KlantEmailadres);
+            MailAddress bcc = new MailAddress("lars.van.driel@hotmail.com", "Lars van Driel");
 
-            MailMessage mail = new MailMessage(emailadresAfzender, klantEmailadres);
+
+
+            string klant = bestelling.KlantNaam;
+            int bestelnummer = bestelling.BestelNummer;
+            string klantAdresStraatnaam = bestelling.KlantAdresStraatnaam;
+            string klantAdresHuisnummer = bestelling.KlantAdresHuisnummer;
+            string klantAdresPostcode = bestelling.KlantAdresPostcode;
+            string klantAdresPlaatsnaam = bestelling.KlantAdresPlaatsnaam;
+            string klantAdresLand = bestelling.KlantAdresLand;
+
+            MailMessage mail = new MailMessage(from, to);
             SmtpClient client = new SmtpClient
             {
                 Port = 587,
@@ -72,16 +82,16 @@ namespace LOGIC
                 UseDefaultCredentials = false,
                 Host = "smtp-mail.outlook.com",
                 EnableSsl = true,
-                Credentials = new NetworkCredential(emailadresAfzender, wachtwoordAfzender)
+                Credentials = CredentialCache.DefaultNetworkCredentials
             };
+            mail.Bcc.Add(bcc);
             mail.Subject = "Bestelling op Telefoonkraam.nl";
-            mail.Body = "Beste " + klantNaam + ",\n\nBedankt voor je bestelling met nummer " +
-                        Convert.ToString(ordernummer) +
+            mail.Body = "Beste " + klant + ",\n\nBedankt voor je bestelling met nummer " +
+                        Convert.ToString(bestelnummer) +
                         ".\n\nU heeft besteld:\n'Producteninformatie'\n\nWij verzenden jouw bestelling naar:\n" +
                         klantAdresStraatnaam + " " + klantAdresHuisnummer + "\n" + klantAdresPostcode + " " +
                         klantAdresPlaatsnaam + "\n" + klantAdresLand +
                         "\n\nMet vriendelijke groet,\nTelefoonkraam.nl";
-
             try
             {
                 Console.WriteLine(@"Bezig met verzenden");
@@ -90,9 +100,9 @@ namespace LOGIC
             }
             catch (SmtpFailedRecipientsException exception)
             {
-                for (int i = 0; i < exception.InnerExceptions.Length; i++)
+                foreach (SmtpFailedRecipientException innerException in exception.InnerExceptions)
                 {
-                    SmtpStatusCode status = exception.InnerExceptions[i].StatusCode;
+                    SmtpStatusCode status = innerException.StatusCode;
                     if (status == SmtpStatusCode.MailboxBusy ||
                         status == SmtpStatusCode.MailboxUnavailable)
                     {
@@ -103,13 +113,12 @@ namespace LOGIC
                     else
                     {
                         Console.WriteLine(@"Failed to deliver message to {0}",
-                            exception.InnerExceptions[i].FailedRecipient);
+                            innerException.FailedRecipient);
                     }
                 }
             }
             return true;
         }
-    }
 
         public List<Product> ZoekProduct(string zoekterm)
         {
