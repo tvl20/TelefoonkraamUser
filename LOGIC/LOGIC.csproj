@@ -43,6 +43,7 @@
     <Compile Include="Bestelling.cs" />
     <Compile Include="Bestelregel.cs" />
     <Compile Include="Categorie.cs" />
+    <Compile Include="IKlantData.cs" />
     <Compile Include="Kortingscode.cs" />
     <Compile Include="Merk.cs" />
     <Compile Include="BestelStatus.cs" />

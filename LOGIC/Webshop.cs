@@ -2,29 +2,63 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LOGIC
 {
     public class Webshop
     {
+        private IKlantData KlantData { get; set; }
         public List<Product> Producten { get; private set; }
         public List<Toestel> Toestellen { get; private set; }
         public List<Merk> Merken { get; private set; }
         public List<Categorie> Categorieën { get; private set; }
         public List<Bestelling> Bestellingen { get; private set; }
-        public List<Kortingscode> Kortingscodes { get; private set; }
+        public Kortingscode Kortingscode { get; private set; }
         public Winkelwagen Winkelwagen { get; private set; }
 
-        public Webshop(List<Product> producten, List<Toestel> toestellen, List<Merk> merken, List<Categorie> categorieën, List<Bestelling> bestellingen, List<Kortingscode> kortingscodes, Winkelwagen winkelwagen)
+        public Webshop(IKlantData klantData, List<Product> producten, List<Toestel> toestellen, List<Merk> merken,
+            List<Categorie> categorieën, List<Bestelling> bestellingen, Kortingscode kortingscode,
+            Winkelwagen winkelwagen)
         {
+            KlantData = klantData;
             Producten = producten;
             Toestellen = toestellen;
             Merken = merken;
             Categorieën = categorieën;
             Bestellingen = bestellingen;
-            Kortingscodes = kortingscodes;
+            Kortingscode = kortingscode;
             Winkelwagen = winkelwagen;
+        }
+
+        public bool BestelWinkelmandje(string kortingscode, string klantNaam, string klantEmailadres,
+            string klantAdresLand, string klantAdresPostcode, string klantAdresPlaatsnaam, string klantAdresStraatnaam,
+            string klantAdresHuisnummer, string klantTelefoonnummer)
+        {
+            Kortingscode valideKortingscode = null;
+            if (kortingscode != null)
+            {
+                try
+                {
+                    valideKortingscode = KlantData.ControleerKortingsCode(kortingscode);
+                }
+                catch
+                {
+                    //ToDo: Exception handling
+                }
+            }
+            List<Product> besteldeProducten = Winkelwagen.Producten;
+            Bestelling bestelling = new Bestelling(besteldeProducten, valideKortingscode, klantNaam, klantEmailadres, klantAdresLand, klantAdresPostcode, klantAdresPlaatsnaam, klantAdresStraatnaam, klantAdresHuisnummer, klantTelefoonnummer);
+            int bestelnummer = KlantData.BestellingVerzenden(bestelling);
+            bestelling.SetBestelNummer(bestelnummer);
+            return VerzendBestelBevestiging(bestelling);
+
+        }
+
+        public bool VerzendBestelBevestiging(Bestelling bestelling)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Product> ZoekProduct(string zoekterm)
@@ -56,22 +90,6 @@ namespace LOGIC
         {
             return Bestellingen.First(bestelling => bestelling.BestelNummer == bestelnummer &&
                                              bestelling.KlantEmailadres == emailadres).BestelStatus;
-        }
-
-        public bool GebruikKortingsCode(string code)
-        {
-            Kortingscode mogelijkeKortingscode = Kortingscodes.First(kortingscode => kortingscode.Code == code);
-            if (mogelijkeKortingscode == null)
-            {
-                return false;
-            }
-            if (mogelijkeKortingscode.EindDatum >= DateTime.Today ||
-                mogelijkeKortingscode.IngangsDatum >= DateTime.Today)
-            {
-                return false;
-            }
-            Winkelwagen.GebruikKortingsCode(mogelijkeKortingscode);
-            return true;
         }
 
         public void RegistreerVoorNieuwsbrief(string emailadres)

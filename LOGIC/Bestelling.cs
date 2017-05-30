@@ -10,6 +10,7 @@ namespace LOGIC
     {
         public int BestelNummer { get; private set; }
         public List<Bestelregel> Bestelregels { get; private set; }
+        public DateTime BestelDatum { get; private set; }
         public BestelStatus BestelStatus { get; private set; }
         public Kortingscode Kortingscode { get; private set; }
         public string KlantNaam { get; private set; }
@@ -47,40 +48,14 @@ namespace LOGIC
             {
                 Bestelregels.Add(new Bestelregel(product.Naam, product.VerkoopPrijs, product.Afbeelding, products.Count(product1 => product1.Equals(product))));
             }
-            //TODO: Voeg bestelling toe aan Database
-            //TODO: Geef Bestelnummer zijn waarde
-            BestelStatus = BestelStatus.Besteld;
-            //TODO: Bevestigingsemail verzenden
+            BestelStatus = BestelStatus.Betaald;
+            BestelDatum = DateTime.Now;
+            
         }
 
-        public Bestelling(int orderNummer, List<Bestelregel> bestelregels, BestelStatus bestelStatus, Kortingscode kortingscode, string klantNaam, string klantEmailadres, string klantAdresLand, string klantAdresPostcode, string klantAdresPlaatsnaam, string klantAdresStraatnaam, string klantAdresHuisnummer, string klantTelefoonnummer)
+        public void SetBestelNummer(int bestelnummer)
         {
-            BestelNummer = orderNummer;
-            Bestelregels = bestelregels;
-            BestelStatus = bestelStatus;
-            Kortingscode = kortingscode;
-            KlantNaam = klantNaam;
-            KlantEmailadres = klantEmailadres;
-            KlantAdresLand = klantAdresLand;
-            KlantAdresPostcode = klantAdresPostcode;
-            KlantAdresPlaatsnaam = klantAdresPlaatsnaam;
-            KlantAdresStraatnaam = klantAdresStraatnaam;
-            KlantAdresHuisnummer = klantAdresHuisnummer;
-            KlantTelefoonnummer = klantTelefoonnummer;
-        }
-        public Bestelling(int orderNummer, List<Bestelregel> bestelregels, BestelStatus bestelStatus, string klantNaam, string klantEmailadres, string klantAdresLand, string klantAdresPostcode, string klantAdresPlaatsnaam, string klantAdresStraatnaam, string klantAdresHuisnummer, string klantTelefoonnummer)
-        {
-            BestelNummer = orderNummer;
-            Bestelregels = bestelregels;
-            BestelStatus = bestelStatus;
-            KlantNaam = klantNaam;
-            KlantEmailadres = klantEmailadres;
-            KlantAdresLand = klantAdresLand;
-            KlantAdresPostcode = klantAdresPostcode;
-            KlantAdresPlaatsnaam = klantAdresPlaatsnaam;
-            KlantAdresStraatnaam = klantAdresStraatnaam;
-            KlantAdresHuisnummer = klantAdresHuisnummer;
-            KlantTelefoonnummer = klantTelefoonnummer;
+            BestelNummer = bestelnummer;
         }
 
         public BestelStatus GeefBestelStatus()
