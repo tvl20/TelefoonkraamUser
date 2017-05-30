@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -56,10 +58,58 @@ namespace LOGIC
 
         }
 
-        public bool VerzendBestelBevestiging(Bestelling bestelling)
+        private bool VerzendBestelBevestiging(Bestelling bestelling)
         {
-            throw new NotImplementedException();
+            string emailadresAfzender = null;
+            string wachtwoordAfzender = null;
+            string ontvangerEmailadres
+
+            MailMessage mail = new MailMessage(emailadresAfzender, klantEmailadres);
+            SmtpClient client = new SmtpClient
+            {
+                Port = 587,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Host = "smtp-mail.outlook.com",
+                EnableSsl = true,
+                Credentials = new NetworkCredential(emailadresAfzender, wachtwoordAfzender)
+            };
+            mail.Subject = "Bestelling op Telefoonkraam.nl";
+            mail.Body = "Beste " + klantNaam + ",\n\nBedankt voor je bestelling met nummer " +
+                        Convert.ToString(ordernummer) +
+                        ".\n\nU heeft besteld:\n'Producteninformatie'\n\nWij verzenden jouw bestelling naar:\n" +
+                        klantAdresStraatnaam + " " + klantAdresHuisnummer + "\n" + klantAdresPostcode + " " +
+                        klantAdresPlaatsnaam + "\n" + klantAdresLand +
+                        "\n\nMet vriendelijke groet,\nTelefoonkraam.nl";
+
+            try
+            {
+                Console.WriteLine(@"Bezig met verzenden");
+                client.Send(mail);
+                Console.WriteLine(@"Bericht verzonden");
+            }
+            catch (SmtpFailedRecipientsException exception)
+            {
+                for (int i = 0; i < exception.InnerExceptions.Length; i++)
+                {
+                    SmtpStatusCode status = exception.InnerExceptions[i].StatusCode;
+                    if (status == SmtpStatusCode.MailboxBusy ||
+                        status == SmtpStatusCode.MailboxUnavailable)
+                    {
+                        Console.WriteLine(@"Delivery failed - retrying in 5 seconds.");
+                        System.Threading.Thread.Sleep(5000);
+                        client.Send(mail);
+                    }
+                    else
+                    {
+                        Console.WriteLine(@"Failed to deliver message to {0}",
+                            exception.InnerExceptions[i].FailedRecipient);
+                    }
+                }
+            }
+            return true;
         }
+    }
 
         public List<Product> ZoekProduct(string zoekterm)
         {
