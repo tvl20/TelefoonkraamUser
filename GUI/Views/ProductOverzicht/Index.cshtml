@@ -1,0 +1,24 @@
+﻿@using GUI.Models;
+@using LOGIC
+@model WebshopModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="../../Content/Site.css" />
+
+<h2>Index</h2>
+
+@foreach (Merk merk in Model.KlantLogica.GeefMerken())
+{
+    <a href="ToestelOverzicht.cshtml">
+        <div class="Merk">
+            <h3>@merk.Naam</h3>
+        </div>
+    </a>
+
+
+}
+
+
+

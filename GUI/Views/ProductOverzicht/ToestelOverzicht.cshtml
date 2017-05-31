@@ -1,0 +1,24 @@
+﻿@using GUI.Models;
+@using LOGIC
+@model WebshopModel
+
+@functions {
+    public Merk Merk { get; set; }
+}
+
+@{
+    ViewBag.Title = "ToestelOverzicht";
+    string merkNaam = ViewBag["MerkNaam"];
+}
+
+<h2>ToestelOverzicht</h2>
+
+@Merk = Model.KlantLogica.GeefMerken().First(merk => merk.Naam == merkNaam)
+@foreach (Toestel toestel in Merk.Toestellen)
+{
+    <div>
+        <h3>
+            @toestel.Naam
+        </h3>
+    </div>
+}

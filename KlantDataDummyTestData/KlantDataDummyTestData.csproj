@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ECDF7AED-2166-4BE1-B32E-0E15A49B3FEE}</ProjectGuid>
+    <ProjectGuid>{9A58E724-B6AD-42DE-A62A-CF81C91DAB78}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LOGIC</RootNamespace>
-    <AssemblyName>LOGIC</AssemblyName>
+    <RootNamespace>KlantDataDummyTestData</RootNamespace>
+    <AssemblyName>KlantDataDummyTestData</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,19 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bestelling.cs" />
-    <Compile Include="Bestelregel.cs" />
-    <Compile Include="Categorie.cs" />
-    <Compile Include="IKlantData.cs" />
-    <Compile Include="IKlantLogica.cs" />
-    <Compile Include="Kortingscode.cs" />
-    <Compile Include="Merk.cs" />
-    <Compile Include="BestelStatus.cs" />
-    <Compile Include="Product.cs" />
-    <Compile Include="Toestel.cs" />
-    <Compile Include="Webshop.cs" />
+    <Compile Include="KlantDummyData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Winkelwagen.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LOGIC\LOGIC.csproj">
+      <Project>{ecdf7aed-2166-4be1-b32e-0e15a49b3fee}</Project>
+      <Name>LOGIC</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

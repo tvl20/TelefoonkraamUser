@@ -54,8 +54,13 @@
     <Compile Include="BestellingTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebshopTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KlantDataDummyTestData\KlantDataDummyTestData.csproj">
+      <Project>{9a58e724-b6ad-42de-a62a-cf81c91dab78}</Project>
+      <Name>KlantDataDummyTestData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LOGIC\LOGIC.csproj">
       <Project>{ecdf7aed-2166-4be1-b32e-0e15a49b3fee}</Project>
       <Name>LOGIC</Name>

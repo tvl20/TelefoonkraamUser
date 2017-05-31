@@ -22,5 +22,7 @@ namespace LOGIC
         /// <param name="bestelling"></param>
         /// <returns></returns>
         int BestellingVerzenden(Bestelling bestelling);
+
+        List<Merk> HaalAlleMerkenOp();
     }
 }

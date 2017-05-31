@@ -15,6 +15,16 @@ namespace LOGIC
             Naam = naam;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Categorie))
+            {
+                return false;
+            }
+            Categorie otherCategorie = (Categorie) obj;
+            return Naam.Equals(otherCategorie.Naam);
+        }
+
         public override string ToString()
         {
             return Naam;
